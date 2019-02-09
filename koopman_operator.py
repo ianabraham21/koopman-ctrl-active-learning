@@ -71,7 +71,7 @@ class KoopmanOperator(object):
         # self.G = self.G + np.outer(fk, fk)
         # self.A = self.A + np.outer(fk, fkpo)
         self.K = np.linalg.pinv(self.G).dot(self.A)
-        Kcont = np.real(logm(self.K)/self.sampling_time)
+        Kcont = np.real(logm(self.K, disp=False)[0]/self.sampling_time)
         self.Kx = Kcont.T[0:NUM_STATE_OBS_, 0:NUM_STATE_OBS_]
         self.Ku = Kcont.T[0:NUM_STATE_OBS_, NUM_STATE_OBS_:NUM_OBS_]
 

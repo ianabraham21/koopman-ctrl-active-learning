@@ -92,10 +92,15 @@ def main():
 
         state = next_state ### backend : update the simulator state 
         ### we can also use a decaying weight on inf gain
-        task.inf_weight = 100.0# * (0.99**(t))
+        task.inf_weight = 100.0 * (0.99**(t))
         if t % 100 == 0:
-            print('time : {}, pose : {}, {}'.format(t, get_measurement(state), ustar))
-    plt.plot(err)
+            print('time : {}, pose : {}, {}'.format(t*quad.time_step, 
+                                                    get_measurement(state), ustar))
+
+    t = [i * quad.time_step for i in range(simulation_time)]
+    plt.plot(t, err)
+    plt.xlabel('t')
+    plt.ylabel('tracking error')
     plt.show()
 
 
